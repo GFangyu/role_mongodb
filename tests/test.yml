@@ -51,10 +51,9 @@
       '8': '4.0'
       '9': '4.2'
       '10': '4.4'
-    mogodb_type_select:
+    mongodb_type_select:
       '1': 'community'
       '2': 'enterprise'
-
     mongodb_type: "{{mongodb_type_select[mongodb_type_selection]}}"
     mongodb_version: "{{mongodb_version_select[mongodb_version_selection]}}"
     mongodb_root_password: "{{mongodb_input_password}}"
