@@ -5,6 +5,13 @@
     - role_mongodb
     
   vars_prompt:
+    - name: 'mongodb_type_selection'
+      prompt: "\nPlease choose the number for your MongoDB version type [1/2] \n\n
+      1: MongoDB Community Server \n
+      2: MongoDB Enterprise Server \n"
+      private: no
+      default: 1
+
     - name: 'mongodb_version_selection'
       prompt: "\nPlease choose the number for MongoDB version [ 1/2/../10] \n\n
       1: MongoDB3.0(support Ubuntu16 and redhat)\n
@@ -24,6 +31,13 @@
       prompt: "\nPlease your MongoDB root password: \n\ndefault"
       private: no
       default: 123456
+    
+    - name: 'open remote access'
+      prompt: "\nOpen remote access or not\n\n
+      1: open(Open remote access to your MongoDB)\n
+      2: close(close remote access to your MongoDB)\n"
+      private: no
+      default: 1
 
   vars:
     mongodb_version_select:
@@ -37,12 +51,17 @@
       '8': '4.0'
       '9': '4.2'
       '10': '4.4'
+    mogodb_type_select:
+      '1': 'community'
+      '2': 'enterprise'
+
+    mongodb_type: "{{mongodb_type_select[mongodb_type_selection]}}"
     mongodb_version: "{{mongodb_version_select[mongodb_version_selection]}}"
     mongodb_root_password: "{{mongodb_input_password}}"
 
   pre_tasks:
    - debug:
-       msg: Will install MongoDB {{mongodb_version}}
+       msg: Will install MongoDB "{{mongodb_type}}-{{mongodb_version}}"
 
   post_tasks:
     - name: pre_post

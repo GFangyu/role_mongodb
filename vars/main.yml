@@ -7,5 +7,3 @@ mongodb_server_meta:
     name: "enterprise"
     url: "$basearch"
     dns: "com"
-        
-    
